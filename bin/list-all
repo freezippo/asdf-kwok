@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+git ls-remote --tags --refs "https://github.com/kubernetes-sigs/kwok.git" |
+  sed -E -n 's,.*refs/tags/(.*),\1,p' |
+  sed -E -n 's,^v?([0-9]+(\.[0-9]+)*)$,\1,p' |
+  uniq | sort -V | xargs echo

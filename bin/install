@@ -12,7 +12,7 @@ install_kwok() {
     github_base_url=https://github.com/kubernetes-sigs/kwok/releases/download
     download_url="${github_base_url}/v${version}/${filename}"
     echo "Downloading kind from $download_url"
-    mkdir $(dirname ${bin_path})
+    mkdir -p $(dirname ${bin_path})
     curl -s -L ${download_url} -o ${bin_path}
     chmod +x ${bin_path}
 
@@ -28,7 +28,7 @@ install_kwokctl() {
     github_base_url=https://github.com/kubernetes-sigs/kwok/releases/download
     download_url="${github_base_url}/v${version}/${filename}"
     echo "Downloading kind from $download_url"
-    mkdir $(dirname ${bin_path})
+    mkdir -p $(dirname ${bin_path})
     curl -s -L ${download_url} -o ${bin_path}
     chmod +x ${bin_path}
 

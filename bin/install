@@ -8,10 +8,10 @@ install_kwok() {
     bin_path=${install_path}/bin/kwok
     platform=$(uname | tr [:upper:] [:lower:])
     arch=amd64
-    filename=kind-${platform}-${arch}
+    filename=kwok-${platform}-${arch}
     github_base_url=https://github.com/kubernetes-sigs/kwok/releases/download
     download_url="${github_base_url}/v${version}/${filename}"
-    echo "Downloading kind from $download_url"
+    echo "Downloading kwok from $download_url"
     mkdir -p $(dirname ${bin_path})
     curl -s -L ${download_url} -o ${bin_path}
     chmod +x ${bin_path}
@@ -24,10 +24,10 @@ install_kwokctl() {
     bin_path=${install_path}/bin/kwokctl
     platform=$(uname | tr [:upper:] [:lower:])
     arch=amd64
-    filename=kind-${platform}-${arch}
+    filename=kwokctl-${platform}-${arch}
     github_base_url=https://github.com/kubernetes-sigs/kwok/releases/download
     download_url="${github_base_url}/v${version}/${filename}"
-    echo "Downloading kind from $download_url"
+    echo "Downloading kwokctl from $download_url"
     mkdir -p $(dirname ${bin_path})
     curl -s -L ${download_url} -o ${bin_path}
     chmod +x ${bin_path}

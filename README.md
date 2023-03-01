@@ -10,7 +10,7 @@ Check out the [asdf](https://github.com/asdf-vm/asdf) readme for instructions.
 Installation
 ------------
 ```
-asdf plugin-add kind https://github.com/freezippo/asdf-kwok.git
-asdf install kind 0.1.0
-asdf global kind 0.1.0
+asdf plugin-add kwok https://github.com/freezippo/asdf-kwok.git
+asdf install kwok latest
+asdf global kwok latest
 ```

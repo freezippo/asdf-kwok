@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Homepage: https://kwok.sigs.k8s.io"
+echo "GitHub: https://github.com/kubernetes-sigs/kwok"
+echo "ASDF Plugin: https://github.com/freezippo/asdf-kwok"

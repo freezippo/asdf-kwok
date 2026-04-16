@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+rm -f "${ASDF_INSTALL_PATH}/bin/kwok"
+rm -f "${ASDF_INSTALL_PATH}/bin/kwokctl"

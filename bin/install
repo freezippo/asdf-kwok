@@ -1,40 +1,32 @@
 #!/usr/bin/env bash
-set -e
-set -o pipefail
+set -euo pipefail
 
-install_kwok() {
-    version=$2
-    install_path=$3
-    bin_path=${install_path}/bin/kwok
-    platform=$(uname | tr [:upper:] [:lower:])
-    arch=amd64
-    filename=kwok-${platform}-${arch}
-    github_base_url=https://github.com/kubernetes-sigs/kwok/releases/download
-    download_url="${github_base_url}/v${version}/${filename}"
-    echo "Downloading kwok from $download_url"
-    mkdir -p $(dirname ${bin_path})
-    curl -s -L ${download_url} -o ${bin_path}
-    chmod +x ${bin_path}
+# shellcheck source=lib/utils.bash disable=SC1091
+source "$(dirname "$0")/lib/utils.bash"
 
+install_binary() {
+    local component="$1"
+    local version="$2"
+    local install_path="$3"
+    local download_path="$4"
+    local bin_path="${install_path}/bin/${component}"
+    local platform
+    platform="$(get_platform)"
+    local arch
+    arch="$(get_arch)"
+    local filename="${component}-${platform}-${arch}"
+
+    mkdir -p "$(dirname "${bin_path}")"
+
+    # If bin/download already fetched the binaries, use them
+    if [[ -f "${download_path}/${filename}" ]]; then
+        cp "${download_path}/${filename}" "${bin_path}"
+    else
+        # Legacy fallback: download here if bin/download was not run
+        download_binary "${component}" "${version}" "$(dirname "${bin_path}")"
+        mv "$(dirname "${bin_path}")/${filename}" "${bin_path}"
+    fi
 }
 
-install_kwokctl() {
-    version=$2
-    install_path=$3
-    bin_path=${install_path}/bin/kwokctl
-    platform=$(uname | tr [:upper:] [:lower:])
-    arch=amd64
-    filename=kwokctl-${platform}-${arch}
-    github_base_url=https://github.com/kubernetes-sigs/kwok/releases/download
-    download_url="${github_base_url}/v${version}/${filename}"
-    echo "Downloading kwokctl from $download_url"
-    mkdir -p $(dirname ${bin_path})
-    curl -s -L ${download_url} -o ${bin_path}
-    chmod +x ${bin_path}
-
-}
-
-
-install_kwok "${ASDF_INSTALL_TYPE}" "${ASDF_INSTALL_VERSION}" "${ASDF_INSTALL_PATH}"
-install_kwokctl "${ASDF_INSTALL_TYPE}" "${ASDF_INSTALL_VERSION}" "${ASDF_INSTALL_PATH}"
-
+install_binary kwok "${ASDF_INSTALL_VERSION}" "${ASDF_INSTALL_PATH}" "${ASDF_DOWNLOAD_PATH:-}"
+install_binary kwokctl "${ASDF_INSTALL_VERSION}" "${ASDF_INSTALL_PATH}" "${ASDF_DOWNLOAD_PATH:-}"

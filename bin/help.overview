@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "kwok - Kubernetes WithOut Kubelet"
+echo "Simulates thousands of Nodes and Clusters for Kubernetes development and testing."

@@ -30,7 +30,7 @@ jobs:
         include:
           - container: alpine:latest
             preinstall: apk add bash coreutils curl git
-          - container: rockylinux:latest
+          - container: rockylinux:9
             preinstall: dnf -y install git
           - container: ubuntu:latest
             preinstall: apt-get -y update && apt-get -y install curl git

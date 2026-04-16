@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# shellcheck source=lib/utils.bash
+# shellcheck source=lib/utils.bash disable=SC1091
 source "$(dirname "$0")/lib/utils.bash"
 
 download_binary kwok "${ASDF_INSTALL_VERSION}" "${ASDF_DOWNLOAD_PATH}"
